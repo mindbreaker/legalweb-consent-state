@@ -1,5 +1,5 @@
 homepage: "https://www.webreload.de/"
 documentation: "https://github.com/mindbreaker/legalweb-consent-state/"
 versions:
-  - sha: 0f0121048174acb2f2d5389b988e0052921ad7c1
+  - sha: cd27c7484a1e0d678d8349b7e949529cc4a3dc33
     changeNotes: Initial release.
