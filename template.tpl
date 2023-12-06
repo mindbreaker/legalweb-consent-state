@@ -35,30 +35,25 @@ ___SANDBOXED_JS_FOR_WEB_TEMPLATE___
 
 const queryPermission = require('queryPermission');
 const getCookieValues = require('getCookieValues');
-const JSON = require('JSON');
 const decode = require('decodeUriComponent');
-const cookieName = 'CookieScriptConsent';
-let returnVal = '';
-let cookieVal;
+
+const JSON = require('JSON');
+const cookieName = 'legalweb_cookie_settings';
+let integrations = '|';
+let cookieValues;
 
 if (queryPermission('get_cookies', cookieName)) {
-  cookieVal = getCookieValues(cookieName);
-  if (cookieVal && cookieVal.length > 0) {
-  	let consentCookie = cookieVal[0].toLowerCase();
-      consentCookie = decode(consentCookie);
-      consentCookie = JSON.parse(consentCookie);
-      if(consentCookie.action === 'accept') {
-        if(consentCookie.categories === undefined) {
-          returnVal = 'accept';
-        } else {
-          let categories = consentCookie.categories;
-          categories = JSON.parse(categories);
-          returnVal = categories.join(',');
-        }
+  cookieValues = getCookieValues(cookieName);
+  if (cookieValues && cookieValues.length > 0) {
+
+      let settings = JSON.parse(decode(cookieValues[0]));
+      if(settings && settings.integrations) {
+        integrations += settings.integrations.join('|') + '|';
       }
   }
 }
-return returnVal;
+
+return integrations;
 
 
 ___WEB_PERMISSIONS___
