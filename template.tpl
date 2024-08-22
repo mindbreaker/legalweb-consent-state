@@ -52,7 +52,7 @@ if (queryPermission('get_cookies', cookieName)) {
       }
   }
 }
-
+data.gtmOnSucces = true;
 return integrations;
 
 
